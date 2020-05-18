@@ -7,6 +7,7 @@ export default function ChartField(){
     let labels = ['January', 'February', 'March',
     'April', 'May'];
     let data = [65, 59, 80, 81, 56];
+
     const state = {
         labels: labels,
         datasets: [
@@ -69,7 +70,7 @@ export default function ChartField(){
                 <Col lg={6}>
                     <div>
                         <Pie
-                            data={state}
+                            data={state2}
                             options={{
                             title:{
                                 display:true,
