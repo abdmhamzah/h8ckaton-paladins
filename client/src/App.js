@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dashboard, FormAdd, Chart } from './pages';
+import { Dashboard, ChartField } from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from "react-bootstrap";
 import SideNav from "./components/SideNav";
@@ -8,8 +8,6 @@ import {styles} from './css';
 import { Provider } from 'react-redux'
 import store from './store'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-// import TableView from './components/table'
-//       <TableView></TableView>
 
 const routes = [
   {
@@ -19,7 +17,7 @@ const routes = [
   },
   {
     path: '/chart',
-    children: <Chart/>
+    children: <ChartField/>
   },
 ];
 

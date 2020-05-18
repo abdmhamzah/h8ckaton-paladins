@@ -8,5 +8,11 @@ export const styles = {
     contentTable: {
         marginRight: '0px',
         marginLeft: '0px',
+    },
+    actionBtn: {
+        width: '160px',
+    },
+    btnEdit: {
+        margin: '0 5px',
     }
 }

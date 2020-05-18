@@ -31,7 +31,7 @@ function TableView() {
                         <th> Category</th>
                         <th> Description</th>
                         <th> Amount</th>
-                        <th></th>
+                        <th> Actions</th>
                     </tr>
                 </thead>
 
