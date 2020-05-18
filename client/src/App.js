@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from "react-bootstrap";
 import SideNav from "./components/SideNav";
 import './css/nav.css'
+import {styles} from './css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const routes = [
@@ -11,10 +12,6 @@ const routes = [
     exact: true,
     path: '/',
     children: <Dashboard/>
-  },
-  {
-    path: '/add',
-    children: <FormAdd/>
   },
   {
     path: '/chart',
@@ -40,7 +37,7 @@ function App() {
               <Col xs={2} id="sidebar-wrapper">      
                 <SideNav />
               </Col>
-              <Col  xs={10} id="page-content-wrapper">
+              <Col xs={10} id="page-content-wrapper" style={styles.content}>
                 <AppRouter />
               </Col> 
           </Row>
