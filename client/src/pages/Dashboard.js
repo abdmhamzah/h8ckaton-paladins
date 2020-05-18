@@ -1,6 +1,7 @@
 import React from 'react';
 import { styles } from '../css';
 import { Row, Col } from "react-bootstrap";
+import TableView from '../components/table'
 
 export default function Dashboard(){
     return (
@@ -8,7 +9,7 @@ export default function Dashboard(){
             <h3>Dashboard</h3>
             <hr style={styles.hrBot}/>
             <Row style={styles.contentTable}>
-                <p>test</p>
+                <TableView></TableView>
             </Row>
         </>
     )

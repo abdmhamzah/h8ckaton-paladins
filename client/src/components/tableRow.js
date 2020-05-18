@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { setPlans } from '../store/actions/planActions'
+import { styles } from '../css';
 
 
 function Row(props) {
@@ -58,7 +59,12 @@ function Row(props) {
             <td>{plan.category}</td>
             <td>{plan.description}</td>
             <td>{plan.amount}</td>
-            <td><Button onClick={() => props.showEdit(plan.id)}>Edit</Button><Button onClick={deletePlan}>Delete</Button></td>
+            <td>
+                <div style={styles.actionBtn}>
+                    <Button onClick={() => props.showEdit(plan.id)} style={styles.btnEdit}>Edit</Button>
+                    <Button onClick={deletePlan} style={styles.btnEdit}>Delete</Button>
+                </div>
+            </td>
         </tr>
     }
 
