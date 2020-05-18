@@ -1,5 +1,5 @@
 const initialState = {
-    plans: ['test'],
+    plans: [{ "date": "ExDate", "type": "ExType", "category": "ExCategory", "description": "ExDesc", "amount": "1000", "id": 60 }],
     id: 0
 }
 

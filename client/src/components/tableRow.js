@@ -6,6 +6,7 @@ import { setPlans } from '../store/actions/planActions'
 
 function Row(props) {
     const { plan, isForm } = props
+    const isEdit = (isForm == 'edit')
 
     const [date, setDate] = useState(plan ? plan.date : '')
     const [type, setType] = useState(plan ? plan.type : '')
@@ -16,13 +17,19 @@ function Row(props) {
     const { plans, id } = useSelector(state => state)
     const dispatch = useDispatch()
 
+    console.log(isEdit)
 
 
 
 
     function Submit() {
         if (isForm == 'edit') {
-
+            let newPlan = { date, type, category, description, amount, id }
+            let payload = [...plans]
+            let idx = payload.findIndex(data => data.id == plan.id)
+            payload.splice(idx, 1, newPlan)
+            dispatch(setPlans(payload))
+            props.hideEdit()
         } else {
             console.log('add')
             let newPlan = { date, type, category, description, amount, id }
@@ -31,11 +38,27 @@ function Row(props) {
         }
     }
 
+    function test() {
+        console.log('hoiasdiuhas')
+        props.addtest('5')
+    }
+
+    if (!isForm) {
+        return <tr>
+            <td>{plan.date}</td>
+            <td>{plan.type}</td>
+            <td>{plan.category}</td>
+            <td>{plan.description}</td>
+            <td>{plan.amount}</td>
+            <td><Button onClick={() => props.showEdit(plan.id)}>Edit</Button></td>
+        </tr>
+    }
+
     return (
         <div>
             <p>test
                 {date} {type}, {category}.{description},{amount} test
-                {JSON.stringify(plans)}
+                {JSON.stringify(plans)} ,  {JSON.stringify(props)}
             </p>
 
 
@@ -46,7 +69,7 @@ function Row(props) {
                 <th> <Form.Control placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} /></th>
                 <th> <Form.Control placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} /></th>
                 <th> <Form.Control placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} /></th>
-                <th> <Button onClick={Submit}>Add/Edit</Button></th>
+                <th> <Button onClick={Submit}>{isEdit ? 'Update' : 'Add'}</Button></th>
             </tr>
         </div>
 

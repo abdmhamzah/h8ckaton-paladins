@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Row from './tableRow'
 import { Table, Form, Button } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+
+
+function TableView() {
+    const { plans } = useSelector(state => state)
+
+    const [editId, setEditId] = useState(false)
 
 
 
-function TableView(props) {
-    const { plans } = props
+    function showEdit(id) {
+        console.log('showEdit', id)
+        setEditId(id)
+    }
+
+    function hideEdit() {
+        setEditId(false)
+    }
 
     return (
         <div>
@@ -17,22 +30,17 @@ function TableView(props) {
                         <th> Category</th>
                         <th> Description</th>
                         <th> Amount</th>
-                        <th>0|X</th>
+                        <th></th>
                     </tr>
-                    <Row isForm={true} />
+                    <Row isForm={'add'} />
                 </thead>
 
                 <tbody>
+                    {plans.map(plan => {
+                        return <Row key={plan.id} plan={plan} showEdit={(id) => showEdit(id)} hideEdit={() => hideEdit()} isForm={editId == plan.id ? 'edit' : false} ></Row>
+                    })}
 
-                    <tr>
-                        <td> Date</td>
-                        <td> Type</td>
-                        <td> Category</td>
-                        <td> Description</td>
-                        <td> Amount</td>
-                        <td>0|X</td>
-                    </tr>
-                    {/* <Row /> */}
+
                 </tbody>
             </Table>
         </div>
