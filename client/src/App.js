@@ -5,7 +5,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import SideNav from "./components/SideNav";
 import './css/nav.css'
 import {styles} from './css';
+import { Provider } from 'react-redux'
+import store from './store'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import TableView from './components/table'
+//       <TableView></TableView>
 
 const routes = [
   {
@@ -28,21 +32,20 @@ export const AppRouter = () => (
 function App() {
   return (
     <Router>
-      {/* <Provider store={store}> */}
-        {/* <div className="container">
-          <AppRouter />
-        </div> */}
-        <Container fluid>
-          <Row>
-              <Col xs={2} id="sidebar-wrapper">      
-                <SideNav />
-              </Col>
-              <Col xs={10} id="page-content-wrapper" style={styles.content}>
-                <AppRouter />
-              </Col> 
-          </Row>
-      </Container>
+      <Provider store={store}>
+          <Container fluid>
+            <Row>
+                <Col xs={2} id="sidebar-wrapper">      
+                  <SideNav />
+                </Col>
+                <Col xs={10} id="page-content-wrapper" style={styles.content}>
+                  <AppRouter />
+                </Col> 
+            </Row>
+        </Container>
+      </Provider>
     </Router>
+
   );
 }
 
