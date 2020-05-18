@@ -17,9 +17,13 @@ function Row(props) {
     const { plans, id } = useSelector(state => state)
     const dispatch = useDispatch()
 
-    console.log(isEdit)
-
-
+    function ResetForm() {
+        setDate('')
+        setType('')
+        setCategory('')
+        setDescription('')
+        setAmount('')
+    }
 
 
     function Submit() {
@@ -31,17 +35,21 @@ function Row(props) {
             dispatch(setPlans(payload))
             props.hideEdit()
         } else {
-            console.log('add')
             let newPlan = { date, type, category, description, amount, id }
             let payload = [...plans, newPlan]
             dispatch(setPlans(payload))
+            ResetForm()
         }
     }
 
-    function test() {
-        console.log('hoiasdiuhas')
-        props.addtest('5')
+    function deletePlan() {
+        let payload = [...plans]
+        let idx = payload.findIndex(data => data.id == plan.id)
+        payload.splice(idx, 1)
+        dispatch(setPlans(payload))
     }
+
+
 
     if (!isForm) {
         return <tr>
@@ -50,28 +58,22 @@ function Row(props) {
             <td>{plan.category}</td>
             <td>{plan.description}</td>
             <td>{plan.amount}</td>
-            <td><Button onClick={() => props.showEdit(plan.id)}>Edit</Button></td>
+            <td><Button onClick={() => props.showEdit(plan.id)}>Edit</Button><Button onClick={deletePlan}>Delete</Button></td>
         </tr>
     }
 
     return (
-        <div>
-            <p>test
-                {date} {type}, {category}.{description},{amount} test
-                {JSON.stringify(plans)} ,  {JSON.stringify(props)}
-            </p>
 
 
+        <tr>
+            <th> <Form.Control placeholder="Date" value={date} onChange={(e) => setDate(e.target.value)} /></th>
+            <th> <Form.Control placeholder="Type" value={type} onChange={(e) => setType(e.target.value)} /></th>
+            <th> <Form.Control placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} /></th>
+            <th> <Form.Control placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} /></th>
+            <th> <Form.Control placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} /></th>
+            <th> <Button onClick={Submit}>{isEdit ? 'Update' : 'Add'}</Button></th>
+        </tr>
 
-            <tr>
-                <th> <Form.Control placeholder="Date" value={date} onChange={(e) => setDate(e.target.value)} /></th>
-                <th> <Form.Control placeholder="Type" value={type} onChange={(e) => setType(e.target.value)} /></th>
-                <th> <Form.Control placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} /></th>
-                <th> <Form.Control placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} /></th>
-                <th> <Form.Control placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} /></th>
-                <th> <Button onClick={Submit}>{isEdit ? 'Update' : 'Add'}</Button></th>
-            </tr>
-        </div>
 
     );
 }
