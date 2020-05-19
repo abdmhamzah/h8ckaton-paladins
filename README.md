@@ -54,7 +54,9 @@
 ![Dashboard](client/src/assets/screenshoot1.png)
 ![Chart](client/src/assets/screenshoot2.png)
 
-H8ckaton Paladin is our team name in Hacktiv8 Hackathon. In this project, we build simple Wallet application.
+H8ckaton Paladin is our team name in Hacktiv8 Hackathon. A little bit intro about Hacktiv8 Hackaton, this event only for Hacktiv8 Phase 3 Students. We should make application in strict deadline. The duration for this hackathon is 24 hours, it start the development at 4pm and ends it at 4pm the next day. We divided into teams (3-4 members) and we should decide what we're going to make. It will be showcasing all of the apps built on this hackathon by the end of the session!
+
+And here we go! In this project, we build simple Wallet application.
 Nowadays we almost expenses our money without knowing where the money flow, with this application you can manage your expenses and also your incomes and watch where the money flow. This application Feature can serve you:
 
 - Datasheet of your Incomes and Expenses
