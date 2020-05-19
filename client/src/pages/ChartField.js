@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { styles } from "../css";
 import { Row, Col } from "react-bootstrap";
-import { Bar, Pie } from "react-chartjs-2";
+import { Bar, Pie, Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 
 export default function ChartField() {
@@ -44,15 +44,36 @@ export default function ChartField() {
       },
     ],
   };
+  const state3 = {
+    labels: Object.keys(groupPlansByType()),
+    datasets: [
+      {
+        label: 'Debit vs Credit',
+        fill: false,
+        backgroundColor: 'rgba(75,192,192,1)',
+        borderColor: 'rgba(0,0,0,1)',
+        borderWidth: 2,
+        data: Object.values(groupPlansByType())
+      }
+    ]
+  }
 
   function groupExpensePlans(type = 'debit') {
     return plans.reduce((prev, plan, index) => {
-      if(String(plan.type).toLowerCase() === String(type).toLowerCase()) {
-        if(!prev[plan.category]) prev[plan.category] = 0;
+      if (String(plan.type).toLowerCase() === String(type).toLowerCase()) {
+        if (!prev[plan.category]) prev[plan.category] = 0;
         prev[plan.category] += Number(plan.amount);
       }
       return prev;
     }, {});
+  }
+
+  function groupPlansByType() {
+    return plans.reduce((prev, plan, index) => {
+      if (!prev[plan.type]) prev[plan.type] = 0;
+      prev[plan.type] += Number(plan.amount);
+      return prev;
+    }, {Debit: 0, Credit: 0});
   }
 
   // useEffect(() => {
@@ -96,6 +117,24 @@ export default function ChartField() {
                   display: true,
                   position: "right",
                 },
+              }}
+            />
+          </div>
+        </Col>
+        <Col lg={12}>
+          <div>
+            <Line
+              data={state3}
+              options={{
+                title: {
+                  display: true,
+                  text: 'Debit vs Credit',
+                  fontSize: 20
+                },
+                legend: {
+                  display: false,
+                  position: 'right'
+                }
               }}
             />
           </div>
