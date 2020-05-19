@@ -168,10 +168,14 @@ function Row(props) {
         {" "}
         <Form.Control
           placeholder="Type"
-          type="text"
+          as="select"
           value={type}
           onChange={(e) => setType(e.target.value)}
-        />
+          style={styles.selectType}
+        >
+            <option>Debit</option>
+            <option>Credit</option>
+        </Form.Control>
       </th>
       <th>
         {" "}
