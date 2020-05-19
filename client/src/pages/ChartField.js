@@ -97,6 +97,15 @@ export default function ChartField() {
                   display: false,
                   position: "right",
                 },
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        beginAtZero: true,
+                      },
+                    },
+                  ],
+                },
               }}
             />
           </div>
@@ -132,6 +141,15 @@ export default function ChartField() {
                 legend: {
                   display: false,
                   position: "right",
+                },
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        beginAtZero: true,
+                      },
+                    },
+                  ],
                 },
               }}
             />
