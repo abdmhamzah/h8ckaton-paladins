@@ -1,6 +1,6 @@
-import React from 'react';
-import { Dashboard, ChartField } from './pages';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import { Dashboard, ChartField } from "./pages";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
 import SideNav from "./components/SideNav";
 import './css/nav.css'
@@ -13,18 +13,20 @@ import { PersistGate } from 'redux-persist/integration/react';
 const routes = [
   {
     exact: true,
-    path: '/',
-    children: <Dashboard/>
+    path: "/",
+    children: <Dashboard />,
   },
   {
-    path: '/chart',
-    children: <ChartField/>
+    path: "/chart",
+    children: <ChartField />,
   },
 ];
 
 export const AppRouter = () => (
   <Switch>
-    {routes.map((route) => <Route key={route} {...route} />)}
+    {routes.map((route) => (
+      <Route key={route} {...route} />
+    ))}
   </Switch>
 );
 
@@ -42,11 +44,10 @@ function App() {
                   <AppRouter />
                 </Col> 
             </Row>
-        </Container>
+          </Container>
         </PersistGate>
       </Provider>
     </Router>
-
   );
 }
 
