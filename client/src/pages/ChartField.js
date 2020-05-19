@@ -1,29 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styles } from "../css";
 import { Row, Col } from "react-bootstrap";
 import { Bar, Pie } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 
 export default function ChartField() {
-  let labels = ["January", "February", "March", "April", "May"];
-  let data = [65, 59, 80, 81, 56];
+  const { plans } = useSelector(state => state);
+
+  // let labels = ["January", "February", "March", "April", "May"];
+  // let data = [65, 59, 80, 81, 56];
 
   const state = {
-    labels: labels,
+    labels: Object.keys(groupExpensePlans('debit')),
     datasets: [
       {
-        label: "Rainfall",
+        label: "Debit",
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
-        data: data,
+        data: Object.values(groupExpensePlans('debit')),
       },
     ],
   };
   const state2 = {
-    labels: labels,
+    labels: Object.keys(groupExpensePlans('credit')),
     datasets: [
       {
-        label: "Rainfall",
         backgroundColor: [
           "#B21F00",
           "#C9DE00",
@@ -38,10 +40,24 @@ export default function ChartField() {
           "#003350",
           "#35014F",
         ],
-        data: data,
+        data: Object.values(groupExpensePlans('credit')),
       },
     ],
   };
+
+  function groupExpensePlans(type = 'debit') {
+    return plans.reduce((prev, plan, index) => {
+      if(String(plan.type).toLowerCase() === String(type).toLowerCase()) {
+        if(!prev[plan.category]) prev[plan.category] = 0;
+        prev[plan.category] += Number(plan.amount);
+      }
+      return prev;
+    }, {});
+  }
+
+  // useEffect(() => {
+  //   groupExpensePlans();
+  // }, []);
 
   return (
     <>
@@ -55,11 +71,11 @@ export default function ChartField() {
               options={{
                 title: {
                   display: true,
-                  text: "Average Rainfall per month",
+                  text: "Debit per category",
                   fontSize: 20,
                 },
                 legend: {
-                  display: true,
+                  display: false,
                   position: "right",
                 },
               }}
@@ -73,7 +89,7 @@ export default function ChartField() {
               options={{
                 title: {
                   display: true,
-                  text: "Average Rainfall per month",
+                  text: "Credit per category",
                   fontSize: 20,
                 },
                 legend: {

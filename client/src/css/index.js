@@ -14,5 +14,8 @@ export const styles = {
     },
     btnEdit: {
         margin: '0 5px',
+    },
+    selectType: {
+        width: '100px'
     }
 }
