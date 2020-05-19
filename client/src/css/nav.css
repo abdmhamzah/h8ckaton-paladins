@@ -44,3 +44,16 @@
 body {
     background-color: #e4e4e4ab;
 }
+
+.total-assets {
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.total-assets-title {
+    font-weight: bold;
+}
+
+.total-assets-amount {
+    font-size: 1.3em;
+}
