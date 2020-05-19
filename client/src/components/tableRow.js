@@ -173,8 +173,9 @@ function Row(props) {
           onChange={(e) => setType(e.target.value)}
           style={styles.selectType}
         >
-            <option>Debit</option>
-            <option>Credit</option>
+          <option value="">Choose...</option>
+          <option value="debit">Debit</option>
+          <option value="credit">Credit</option>
         </Form.Control>
       </th>
       <th>
