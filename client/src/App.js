@@ -6,8 +6,9 @@ import SideNav from "./components/SideNav";
 import './css/nav.css'
 import {styles} from './css';
 import { Provider } from 'react-redux'
-import store from './store'
+import {store, persistor} from './store';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const routes = [
   {
@@ -31,6 +32,7 @@ function App() {
   return (
     <Router>
       <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <Container fluid>
             <Row>
                 <Col xs={2} id="sidebar-wrapper">      
@@ -41,6 +43,7 @@ function App() {
                 </Col> 
             </Row>
         </Container>
+        </PersistGate>
       </Provider>
     </Router>
 
