@@ -1,64 +1,63 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { styles } from "../css";
 import { Row, Col } from "react-bootstrap";
 import { Bar, Pie, Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 
 export default function ChartField() {
-  const { plans } = useSelector(state => state);
-
-  // let labels = ["January", "February", "March", "April", "May"];
-  // let data = [65, 59, 80, 81, 56];
+  const { plans } = useSelector((state) => state);
 
   const state = {
-    labels: Object.keys(groupExpensePlans('debit')),
+    labels: Object.keys(groupExpensePlans("debit")),
     datasets: [
       {
         label: "Debit",
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "rgba(0,0,0,1)",
-        borderWidth: 2,
-        data: Object.values(groupExpensePlans('debit')),
+        borderWidth: 1,
+        data: Object.values(groupExpensePlans("debit")),
       },
     ],
   };
+
   const state2 = {
-    labels: Object.keys(groupExpensePlans('credit')),
+    labels: Object.keys(groupExpensePlans("credit")),
     datasets: [
       {
         backgroundColor: [
-          "#B21F00",
-          "#C9DE00",
-          "#2FDE00",
-          "#00A6B4",
-          "#6800B4",
+          "#EC6C85",
+          "#F3A454",
+          "#FACE6C",
+          "#6ABFC0",
+          "#5A9FD6",
         ],
         hoverBackgroundColor: [
-          "#501800",
-          "#4B5000",
-          "#175000",
-          "#003350",
-          "#35014F",
+          "#E53E65",
+          "#EC8729",
+          "#EFB339",
+          "#32B5B0",
+          "#3089C6",
         ],
-        data: Object.values(groupExpensePlans('credit')),
+        data: Object.values(groupExpensePlans("credit")),
       },
     ],
   };
+
   const state3 = {
     labels: Object.keys(groupPlansByType()),
     datasets: [
       {
-        label: 'Debit vs Credit',
+        label: "Debit vs Credit",
         fill: false,
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 2,
-        data: Object.values(groupPlansByType())
-      }
-    ]
-  }
+        backgroundColor: "rgba(75,192,192,1)",
+        borderColor: "rgba(0,0,0,1)",
+        borderWidth: 1,
+        data: Object.values(groupPlansByType()),
+      },
+    ],
+  };
 
-  function groupExpensePlans(type = 'debit') {
+  function groupExpensePlans(type = "debit") {
     return plans.reduce((prev, plan, index) => {
       if (String(plan.type).toLowerCase() === String(type).toLowerCase()) {
         if (!prev[plan.category]) prev[plan.category] = 0;
@@ -69,16 +68,15 @@ export default function ChartField() {
   }
 
   function groupPlansByType() {
-    return plans.reduce((prev, plan, index) => {
-      if (!prev[plan.type]) prev[plan.type] = 0;
-      prev[plan.type] += Number(plan.amount);
-      return prev;
-    }, {Debit: 0, Credit: 0});
+    return plans.reduce(
+      (prev, plan, index) => {
+        if (!prev[plan.type]) prev[plan.type] = 0;
+        prev[plan.type] += Number(plan.amount);
+        return prev;
+      },
+      { Debit: 0, Credit: 0 }
+    );
   }
-
-  // useEffect(() => {
-  //   groupExpensePlans();
-  // }, []);
 
   return (
     <>
@@ -87,7 +85,7 @@ export default function ChartField() {
       <Row style={styles.contentTable}>
         <Col lg={6}>
           <div>
-            <Bar
+            <Line
               data={state}
               options={{
                 title: {
@@ -123,18 +121,18 @@ export default function ChartField() {
         </Col>
         <Col lg={12}>
           <div>
-            <Line
+            <Bar
               data={state3}
               options={{
                 title: {
                   display: true,
-                  text: 'Debit vs Credit',
-                  fontSize: 20
+                  text: "Debit vs Credit",
+                  fontSize: 20,
                 },
                 legend: {
                   display: false,
-                  position: 'right'
-                }
+                  position: "right",
+                },
               }}
             />
           </div>

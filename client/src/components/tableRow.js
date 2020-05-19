@@ -174,8 +174,8 @@ function Row(props) {
           style={styles.selectType}
         >
           <option value="">Choose...</option>
-          <option value="debit">Debit</option>
-          <option value="credit">Credit</option>
+          <option value="Debit">Debit</option>
+          <option value="Credit">Credit</option>
         </Form.Control>
       </th>
       <th>
